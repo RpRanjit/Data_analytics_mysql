@@ -21,7 +21,7 @@ FROM parks_and_recreation.employee_demographics
 WHERE age > 35 
 and gender = "Female";
 
-# In where clause we also puse Pemdas rule
+# In WHERE clause we also use Pemdas rule
 
 SELECT * 
 FROM parks_and_recreation.employee_demographics

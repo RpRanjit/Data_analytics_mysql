@@ -1,6 +1,6 @@
 -- UNION
--- JOIn is use to join the columns of sam or multiple tabales
--- But UNION is use to join rows from sam or multiple columns
+-- JOIn is use to join the columns of same or multiple tabales
+-- But UNION is use to join rows from same or multiple columns
 
 SELECT age, gender
 FROM parks_and_recreation.employee_demographics
