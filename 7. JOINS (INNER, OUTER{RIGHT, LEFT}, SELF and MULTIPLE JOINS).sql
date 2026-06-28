@@ -49,7 +49,7 @@ FROM parks_and_recreation.employee_demographics AS p_ed
 JOIN parks_and_recreation.employee_salary AS p_es
 	ON p_ed.employee_id = p_es.employee_id
 JOIN parks_and_recreation.parks_departments as p_pd
-	ON p_es.dept_id = p_pd.department_ids
+	ON p_es.dept_id = p_pd.department_id
 ;
     
 

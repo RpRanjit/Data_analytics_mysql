@@ -8,7 +8,8 @@ FROM parks_and_recreation.employee_demographics
 WHERE AVG(age) > 40
 GROUP BY gender;
 
--- at above case first we have to group by to use where becasue the gender hasn't been grouped so we can't use where that's why we use HAVING
+-- at above case first we have to group by to use where becasue the gender hasn't been grouped so we can't
+-- use where that's why we use HAVING
 
 SELECT gender, AVG(age)
 FROM parks_and_recreation.employee_demographics
