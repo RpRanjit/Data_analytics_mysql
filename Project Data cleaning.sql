@@ -69,13 +69,33 @@ CREATE TABLE `layoffs_sample2` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 SELECT *
-FROM layoffs_sample2;
+FROM layoffs_sample2
+;
+
 INSERT INTO layoffs_sample2
 SELECT *,
 ROW_NUMBER() OVER
 (PARTITION BY 
-company, location, industry, total_laid_off, percentage_laid_off, `date`, stage, country, funds_raised_millions, row_num
-FROM layoffs_sample
-)
+company, location, industry, total_laid_off, percentage_laid_off, `date`, stage, country, funds_raised_millions) AS row_num
+FROM layoffs_sample;
+
+SELECT *
+FROM layoffs_sample2;
+-- safe mode is ON so DELETE, UPDATE CAN'T BE USE
+SET SQL_SAFE_UPDATES = 0;
+
+DELETE
+FROM layoffs_sample2
+WHERE row_num > 1;
+
+SET SQL_SAFE_UPDATES = 1;
+
+SELECT *
+FROM layoffs_sample2
+WHERE row_num > 1;
+
+SELECT *
+FROM layoffs_sample2;
+
 
 
