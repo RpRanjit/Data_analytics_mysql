@@ -98,4 +98,87 @@ SELECT *
 FROM layoffs_sample2;
 
 
+-- Standardizing data
 
+SELECT *
+FROM layoffs_sample2;
+
+SELECT company
+FROM layoffs_sample2;
+
+SELECT DISTINCT company
+FROM layoffs_sample2;
+
+
+-- TRIM-> DELETE THE WHITE SPACE AROUND THE DATA
+SELECT company, TRIM(company)
+FROM layoffs_sample2;
+
+-- Now UPDATING THE company to TRIM (company) for better analysis
+
+UPDATE layoffs_sample2
+SET company = TRIM(company);
+
+SELECT company, TRIM(company)
+FROM layoffs_sample2;
+
+-- Company have same business but different name
+SELECT *
+FROM layoffs_sample2;
+-- BUT the industry may be different so
+-- OR they have same names but written differently so watch carefully
+-- for industry
+SELECT industry
+FROM layoffs_sample2;
+
+SELECT DISTINCT industry
+FROM layoffs_sample2
+ORDER BY 1;
+
+-- LIKE crypto and crypto-current both are same but assigned differently which will be difficult while visulization so manage it
+SELECT *
+FROM layoffs_sample2
+WHERE industry LIKE 'Crypto%';
+
+UPDATE layoffs_sample2
+SET industry = 'Crypto'
+WHERE industry LIKE 'Crypto%';
+
+SELECT *
+FROM layoffs_sample2
+WHERE industry LIKE 'Crypto%';
+
+-- CHECK OTHERS ALSO
+SELECT DISTINCT location
+FROM layoffs_sample2
+ORDER BY 1;
+
+SELECT DISTINCT country
+FROM layoffs_sample2
+ORDER BY 1;
+
+SELECT DISTINCT country
+FROM layoffs_sample2
+WHERE country LIKE 'United Sta%';
+
+UPDATE layoffs_sample2
+SET country = 'United States'
+WHERE country LIKE 'United Sta%';
+
+-- Now the date how is it can't be use for further analysis because  it is in text so it won't be able to visualize so convert into date
+
+SELECT `date`,
+STR_TO_DATE(`date`, '%m/%d/%Y')
+FROM layoffs_sample2;
+
+UPDATE layoffs_sample2
+SET `date` = STR_TO_DATE(`date`, '%m/%d/%Y');
+
+SELECT `date`
+FROM layoffs_sample2;
+
+ALTER TABLE layoffs_sample2
+MODIFY COLUMN `date` DATE;
+
+SELECT *
+FROM layoffs_sample2;
