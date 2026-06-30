@@ -182,3 +182,56 @@ MODIFY COLUMN `date` DATE;
 
 SELECT *
 FROM layoffs_sample2;
+
+
+
+-- Now figuring iut the blank and null values and manipulate them
+
+SELECT *
+FROM layoffs_sample2;
+
+-- AT first for company
+SELECT *
+FROM layoffs_sample2
+WHERE company IS NULL
+OR company = '';
+-- for location
+SELECT *
+FROM layoffs_sample2
+WHERE location IS NULL
+OR location = '';
+
+-- for industry
+SELECT *
+FROM layoffs_sample2
+WHERE industry IS NULL
+OR industry = '';
+-- Now search for other company having same name they may be related to same industry
+-- because instead of deleting the blank or null valuse it better to fill it for better analysis
+
+SELECT *
+FROM layoffs_sample2
+WHERE company = "Airbnb";
+-- From above we figure out that they have same company in same location so the industry must be the same so update it
+-- Now we  will f igure other blank and null in industry which one have same company but the industry is not listed
+
+SELECT *
+FROM layoffs_sample2 AS t1
+JOIN layoffs_sample2 AS t2
+	ON t1.company = t2.company
+WHERE (t1.industry IS NULL OR t1.industry = '')
+AND t2.industry IS NOT NULL; 
+
+-- Now update it
+
+UPDATE layoffs_sample2 AS t1
+JOIN layoffs_sample2 AS t2
+	ON t1.company = t2.company
+SET t1.industry = t2.industry
+WHERE ( t1.industry IS NULL OR t1.industry = '')
+AND t2.industry IS NOT NULL;
+
+SELECT *
+FROM layoffs_sample2
+WHERE industry IS NULL
+OR industry = '';
