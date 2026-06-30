@@ -235,3 +235,40 @@ WHERE ( t1.industry IS NULL )
 AND t2.industry IS NOT NULL;
 
 
+-- now deleting the rows where total_laid_off  and percentage_laid_off is null
+
+SELECT *
+FROM layoffs_sample2
+WHERE total_laid_off IS NULL
+AND percentage_laid_off IS NULL;
+
+-- WE don't know if these data will be use full in fute=ure or not so we are making new table and deleting it in case for its future use
+
+CREATE TABLE layoffs_sample3
+LIKE layoffs_sample2;
+
+INSERT INTO layoffs_sample3
+SELECT *
+FROM layoffs_sample2;
+
+SELECT *
+FROM layoffs_sample3;
+
+-- NOW  delete the rows and row_num column
+
+DELETE
+FROM layoffs_sample3
+WHERE total_laid_off IS NULL
+AND percentage_laid_off IS NULL;
+
+SELECT *
+FROM layoffs_sample3
+WHERE total_laid_off IS NULL
+AND percentage_laid_off IS NULL;
+
+ALTER TABLE layoffs_sample3
+DROP COLUMN row_num;
+
+SELECT *
+FROM layoffs_sample3;
+
